@@ -260,6 +260,8 @@ __kubectl_custom_func() {
             ;;
         kubectl_logs)
             __kubectl_require_pod_and_container
+            __kubectl_parse_get "deployment" "{{ range .items }}deployment/{{ .metadata.name }} {{ end }}"
+            __kubectl_parse_get "job" "{{ range .items }}job/{{ .metadata.name }} {{ end }}"
             return
             ;;
         kubectl_port-forward)
